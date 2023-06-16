@@ -1,4 +1,5 @@
 from aiogram import types, Dispatcher
+from aiogram.dispatcher.filters import Text
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot, dp
 from .keyboards import start_markup
@@ -58,4 +59,4 @@ async def cat_handler(message: types.Message) -> None:
 def register_handlers_commands(dp: Dispatcher):
     dp.register_message_handler(start_command, commands=['start'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
-    dp.register_message_handler(cat_handler, commands=['cat'])
+    dp.register_message_handler(cat_handler, Text(equals="котики", ignore_case=True))
