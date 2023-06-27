@@ -4,6 +4,8 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot, dp
 from .keyboards import start_markup
 from database.bot_db import sql_command_random
+from parser.news import parser
+from aiogram.types import ParseMode
 
 
 # @dp.message_handler(commands=['start'])
@@ -65,8 +67,23 @@ async def get_random_user(message: types.Message) -> None:
                                        f"\n\n{random_user[2]}")
 
 
+async def get_news(message: types.Message) -> None:
+    news = parser()
+    for i in news:
+        await message.answer_photo(
+            i['image'],
+            caption=f"<b>{i['time']}</b>\n"
+                    f"<a href='{i['url']}'>{i['title']}</a>\n",
+            reply_markup=InlineKeyboardMarkup().add(
+                InlineKeyboardButton("Смотреть", url=i['url'])
+            ),
+            parse_mode=ParseMode.HTML
+        )
+
+
 def register_handlers_commands(dp: Dispatcher):
     dp.register_message_handler(start_command, commands=['start'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(cat_handler, Text(equals="котики", ignore_case=True))
     dp.register_message_handler(get_random_user, Text(equals="get", ignore_case=True))
+    dp.register_message_handler(get_news, commands=['news'])

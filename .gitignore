@@ -1,6 +1,7 @@
 venv
 .env
 media
+bot.sqlite3
 
 .idea
 .vscode

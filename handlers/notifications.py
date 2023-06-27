@@ -37,13 +37,13 @@ async def set_scheduler():
     #     ),
     #     kwargs={"text": "balapan"}
     # )
-    scheduler.add_job(
-        wake_up,
-        IntervalTrigger(
-            seconds=20,
-            start_date=datetime.datetime.now()
-        ),
-    )
+    # scheduler.add_job(
+    #     wake_up,
+    #     IntervalTrigger(
+    #         seconds=20,
+    #         start_date=datetime.datetime.now()
+    #     ),
+    # )
     # scheduler.add_job(
     #     go_to_sleep,
     #     DateTrigger(
