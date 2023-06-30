@@ -1,7 +1,6 @@
 import datetime
 
 import requests
-from pprint import pprint
 from bs4 import BeautifulSoup
 
 
@@ -32,14 +31,14 @@ def get_data(html):
         # class_=lambda value: value and value.startswith("Tag--article"),
         limit=5
     )
-    parserd_data = []
-    for item in items:
-        parserd_data.append({
+    parserd_data = [
+        {
             "title": item.find("a", class_="ArticleItem--name").string.replace("\n", ""),
             "url": item.find("a", class_="ArticleItem--name").get("href"),
             "time": item.find("div", class_="ArticleItem--time").getText().strip(),
             "image": item.find("img").get("src").replace("small", "big")
-        })
+        } for item in items
+    ]
 
     return parserd_data
 
