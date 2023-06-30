@@ -17,6 +17,11 @@ async def start_command(message: types.Message) -> None:
     # await message.reply("This is a reply method")
 
 
+async def test_command(message: types.Message) -> None:
+    await bot.send_message(message.chat.id,
+                           f"testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttest")
+
+
 # @dp.message_handler(commands=['quiz'])
 async def quiz_1(message: types.Message) -> None:
     markup = InlineKeyboardMarkup()
@@ -83,6 +88,7 @@ async def get_news(message: types.Message) -> None:
 
 def register_handlers_commands(dp: Dispatcher):
     dp.register_message_handler(start_command, commands=['start'])
+    dp.register_message_handler(test_command, commands=['test'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(cat_handler, Text(equals="котики", ignore_case=True))
     dp.register_message_handler(get_random_user, Text(equals="get", ignore_case=True))
